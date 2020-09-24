@@ -76,6 +76,8 @@ jobs:
       - name: Build package
         run: mvn package
         working-directory: ${{ env.ARTIFACT_ID }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
       - name: Run package
         run: java -cp target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}.jar ${{ env.GROUP_ID }}.App
