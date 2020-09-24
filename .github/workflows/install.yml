@@ -31,10 +31,14 @@ jobs:
           mkdir -p $SOURCE_PATH
           cat <<- END > $SOURCE_PATH/${{ env.CLASS_NAME }}.java
           package ${{ env.GROUP_ID }};
+
+          import ${{ env.TARGET_GROUP_ID }}.*;
+
           public class ${{ env.CLASS_NAME }}
           {
               public static void main( String[] args )
               {
+                  App.main( null );
                   System.out.println( "Hello from ${{ github.repository }}!" );
               }
           }
