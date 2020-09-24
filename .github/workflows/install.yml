@@ -72,6 +72,12 @@ jobs:
           EOM
         working-directory: ${{ env.ARTIFACT_ID }}
 
+      - name: Install packages
+        run: mvn install
+        working-directory: ${{ env.ARTIFACT_ID }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
+
       - name: Build package
         run: mvn package
         working-directory: ${{ env.ARTIFACT_ID }}
