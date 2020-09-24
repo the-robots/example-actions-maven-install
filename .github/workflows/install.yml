@@ -39,7 +39,7 @@ jobs:
               public static void main( String[] args )
               {
                   System.out.println( "Hello from ${{ github.repository }}!" );
-                  App.main();
+                  App.main( new String[0] );
               }
           }
           END
