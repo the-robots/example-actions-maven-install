@@ -25,11 +25,11 @@ jobs:
       - name: Create project dir
         run: mkdir ${{ env.ARTIFACT_ID }}
 
-      - name: Add App.java file
+      - name: Add ${{ env.CLASS_NAME }}.java file
         run: |
           SOURCE_PATH=src/main/java/$(echo ${{ env.GROUP_ID }} | tr . /)
           mkdir -p $SOURCE_PATH
-          cat <<- END > $SOURCE_PATH/App.java
+          cat <<- END > $SOURCE_PATH/${{ env.CLASS_NAME }}.java
           package ${{ env.GROUP_ID }};
           public class ${{ env.CLASS_NAME }}
           {
