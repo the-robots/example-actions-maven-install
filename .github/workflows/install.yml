@@ -63,6 +63,12 @@ jobs:
                 <version>${{ env.TARGET_VERSION }}</version>
               </dependency>    
             </dependencies>
+            <repositories>
+              <repository>
+                <id>github</id>
+                <url>https://maven.pkg.github.com/${{ github.repository_owner }}/maven-publish</url>
+              </repository>
+            </repositories>
           </project>
           EOM
         working-directory: ${{ env.ARTIFACT_ID }}
