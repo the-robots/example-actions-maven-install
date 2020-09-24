@@ -62,6 +62,7 @@ jobs:
             </dependencies>
           </project>
           EOM
+        working-directory: ${{ env.ARTIFACT_ID }}
 
       - name: Build package
         run: mvn package
