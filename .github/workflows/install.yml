@@ -84,6 +84,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
+      - name: Exec package
+        run: mvn exec:java -D exec.mainClass=${{ env.GROUP_ID }}.${{ env.CLASS_NAME }}
+
       - name: Run package
         run: java -cp target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}.jar ${{ env.GROUP_ID }}.${{ env.CLASS_NAME }}
         working-directory: ${{ env.ARTIFACT_ID }}
