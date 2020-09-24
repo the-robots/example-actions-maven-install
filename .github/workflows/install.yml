@@ -22,29 +22,6 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Create project dir
-        run: mkdir ${{ env.ARTIFACT_ID }}
-
-      - name: Add ${{ env.CLASS_NAME }}.java file
-        run: |
-          SOURCE_PATH=src/main/java/$(echo ${{ env.GROUP_ID }} | tr . /)
-          mkdir -p $SOURCE_PATH
-          cat <<- END > $SOURCE_PATH/${{ env.CLASS_NAME }}.java
-          package ${{ env.GROUP_ID }};
-
-          import ${{ env.TARGET_GROUP_ID }}.App;
-
-          public class ${{ env.CLASS_NAME }}
-          {
-              public static void main( String[] args )
-              {
-                  System.out.println( "Hello from ${{ github.repository }}!" );
-                  App.main( new String[0] );
-              }
-          }
-          END
-        working-directory: ${{ env.ARTIFACT_ID }}
-
       - name: Add pom.xml with dependency
         run: |
           cat > pom.xml << EOM
@@ -70,14 +47,30 @@ jobs:
             </repositories>
           </project>
           EOM
-        working-directory: ${{ env.ARTIFACT_ID }}
+
+      - name: Add ${{ env.CLASS_NAME }}.java file
+        run: |
+          SOURCE_PATH=src/main/java/$(echo ${{ env.GROUP_ID }} | tr . /)
+          mkdir -p $SOURCE_PATH
+          cat <<- END > $SOURCE_PATH/${{ env.CLASS_NAME }}.java
+          package ${{ env.GROUP_ID }};
+
+          import ${{ env.TARGET_GROUP_ID }}.App;
+
+          public class ${{ env.CLASS_NAME }}
+          {
+              public static void main( String[] args )
+              {
+                  System.out.println( "Hello from ${{ github.repository }}!" );
+                  App.main( new String[0] );
+              }
+          }
+          END
 
       - name: Build package
         run: mvn package
-        working-directory: ${{ env.ARTIFACT_ID }}
         env:
           GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
       - name: Exec package
         run: mvn exec:java -D exec.mainClass=${{ env.GROUP_ID }}.${{ env.CLASS_NAME }}
-        working-directory: ${{ env.ARTIFACT_ID }}
