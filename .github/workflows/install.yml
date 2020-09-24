@@ -24,7 +24,7 @@ jobs:
       - name: Add App.java file
         run: |
           SOURCE_PATH=src/main/java/$(echo ${{ env.GROUP_ID }} | tr . /)
-          mkdir $SOURCE_PATH
+          mkdir -p $SOURCE_PATH
           cat <<- END > $SOURCE_PATH/App.java
           package ${{ env.GROUP_ID }};
           public class App
