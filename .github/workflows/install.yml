@@ -60,7 +60,7 @@ jobs:
           {
               public static void main( String[] args )
               {
-                  App.main( new String[0] );
+                  PublishApp.main( new String[0] );
               }
           }
           END
