@@ -72,4 +72,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
       - name: Exec package
-        run: mvn exec:java -D exec.mainClass=${{ env.GROUP_ID }}.${{ env.CLASS_NAME }}
+        run: mvn exec:java -D exec.mainClass=${{ env.GROUP_ID }}.${{ env.CLASS_NAME }} --no-transfer-progress
