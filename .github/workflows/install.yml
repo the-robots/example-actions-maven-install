@@ -67,7 +67,7 @@ jobs:
           END
 
       - name: Install packages
-        run: mvn install --no-transfer-progress -Dmaven.test.skip=true
+        run: mvn install --no-transfer-progress
         env:
           GITHUB_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
 
