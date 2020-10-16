@@ -42,7 +42,7 @@ jobs:
             <repositories>
               <repository>
                 <id>github</id>
-                <url>https://maven.pkg.github.com/${{ github.repository_owner }}/maven-publish</url>
+                <url>https://maven.pkg.github.com/${{ github.repository_owner }}/*</url>
               </repository>
             </repositories>
           </project>
