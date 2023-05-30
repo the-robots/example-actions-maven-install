@@ -1,3 +1,4 @@
+name: Maven Install Example
 on: [push, repository_dispatch]
 
 env:
